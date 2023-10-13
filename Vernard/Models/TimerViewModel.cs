@@ -11,7 +11,7 @@ namespace Vernard.Models
             set
             {
                 SetProperty(ref _timeLeft, value <= 0 ? 0 : value);
-                TimeLeftPercent = TimeTotal > 0 ? ((double)TimeLeft / (double)TimeTotal * 100) : 0;
+                UpdateTimeLeftPercent();
             }
         }
 
@@ -22,7 +22,7 @@ namespace Vernard.Models
             set
             {
                 SetProperty(ref _timeTotal, value <= 0 ? 0 : value);
-                TimeLeftPercent = TimeTotal > 0 ? ((double)TimeLeft / (double)TimeTotal * 100) : 0;
+                UpdateTimeLeftPercent();
             }
         }
 
@@ -30,11 +30,7 @@ namespace Vernard.Models
         public double TimeLeftPercent
         {
             get => _timeLeftPercent;
-            set
-            {
-                Debug.WriteLine($"{TimeLeft} / {TimeTotal} = {value}%");
-                SetProperty(ref _timeLeftPercent, value <= 0 ? 0 : (value >= 100 ? 100 : value));
-            }
+            set => SetProperty(ref _timeLeftPercent, value <= 0 ? 0 : (value >= 100 ? 100 : value));
         }
 
         private TimerState _state;
@@ -54,6 +50,11 @@ namespace Vernard.Models
         internal void Tick()
         {
             TimeLeft -= 1;
+        }
+
+        private void UpdateTimeLeftPercent()
+        {
+            TimeLeftPercent = TimeTotal > 0 ? ((double)TimeLeft / (double)TimeTotal * 100) : 0;
         }
     }
 }
