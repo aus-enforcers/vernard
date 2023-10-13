@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page x:Class="vernard.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Page x:Class="Vernard.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="using:FontAwesome6.Svg"
-        xmlns:common="using:vernard.Common" mc:Ignorable="d">
+        xmlns:common="using:Vernard.Common" mc:Ignorable="d">
 
     <Page.Resources>
         <common:IntToTimeSpanConverter x:Key="IntToTimeSpanConverter" />

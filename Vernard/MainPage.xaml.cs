@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using System.Timers;
 
-namespace vernard
+namespace Vernard
 {
     public sealed partial class MainPage
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Data;
 using System;
-namespace vernard.Common
+
+namespace Vernard.Common
 {
     internal class IntToTimeSpanConverter : IValueConverter
     {

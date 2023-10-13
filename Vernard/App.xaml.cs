@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace vernard
+namespace Vernard
 {
     public partial class App : Application
     {

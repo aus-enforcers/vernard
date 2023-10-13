@@ -5,13 +5,13 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap">
 
-  <Identity Name="601de915-4ed0-4038-9d9c-27d64dd695c8" Publisher="CN=aus-enforcers" Version="2.0.0.0" />
+  <Identity Name="601de915-4ed0-4038-9d9c-27d64dd695c8" Publisher="CN=yellow-corps" Version="2.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="601de915-4ed0-4038-9d9c-27d64dd695c8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>vernard</DisplayName>
-    <PublisherDisplayName>aus-enforcers</PublisherDisplayName>
+    <DisplayName>Vernard</DisplayName>
+    <PublisherDisplayName>yellow-corps</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -26,7 +26,7 @@
 
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
-      <uap:VisualElements DisplayName="vernard" Description="vernard" BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png">
+      <uap:VisualElements DisplayName="Vernard" Description="Vernard" BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

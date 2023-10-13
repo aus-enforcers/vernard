@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Vernard (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Vernard (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
