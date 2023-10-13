@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Vernard.Views;
 
 namespace Vernard
 {

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Vernard.Common
+namespace Vernard.Models
 {
     public abstract class BindableBase : INotifyPropertyChanged
     {

@@ -1,4 +1,4 @@
-﻿namespace Vernard
+﻿namespace Vernard.Models
 {
     public enum TimerState
     {

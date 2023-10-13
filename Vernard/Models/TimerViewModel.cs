@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using Vernard.Common;
 
-namespace Vernard
+namespace Vernard.Models
 {
     public class TimerViewModel : BindableBase
     {

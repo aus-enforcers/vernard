@@ -5,7 +5,7 @@ using System;
 using Windows.Graphics;
 using WinRT.Interop;
 
-namespace Vernard
+namespace Vernard.Views
 {
     public sealed partial class MainWindow : Window
     {
