@@ -4,6 +4,6 @@ Vernard, the VR Stopwatch
 
 # Meet Vernard!
 
-![vernard](./Assets/vernard.png)
+![vernard](./Vernard/Assets/HeroImage.png)
 
 (credit to [Shortcake](https://twitter.com/AliceShortcake))
