@@ -12,9 +12,7 @@ namespace Vernard.Views
         public MainPage()
         {
             this.InitializeComponent();
-            ViewModel = new TimerViewModel();
-            ViewModel.Total = 900;
-            ViewModel.Remaining = 900;
+            ViewModel = new TimerViewModel(900);
         }
 
         private void CreateTimer()
@@ -40,47 +38,57 @@ namespace Vernard.Views
         {
             DispatcherQueue.TryEnqueue(() =>
             {
-                if (!ViewModel.IsPlayable)
+                if (!ViewModel.Tick())
                 {
                     DestroyTimer();
-                }
-                else
-                {
-                    ViewModel.Tick();
                 }
             });
         }
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             CreateTimer();
-            ViewModel.State = TimerState.Playing;
+            ViewModel.Play();
         }
         private void ButtonPause_Click(object sender, RoutedEventArgs e)
         {
             DestroyTimer();
-            ViewModel.State = TimerState.Paused;
+            ViewModel.Pause();
         }
 
         private void ButtonStop_Click(object sender, RoutedEventArgs e)
         {
             DestroyTimer();
-            ViewModel.Remaining = 900;
-            ViewModel.Total = 900;
-            ViewModel.State = TimerState.Ready;
+            ViewModel.Stop();
         }
 
         private void ButtonAddMinute_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Remaining += 60;
-            if (ViewModel.Remaining > ViewModel.Total)
-            {
-                ViewModel.Total = ViewModel.Remaining;
-            }
+
+            ViewModel.AddMinute();
         }
 
         private void ButtonRemoveMinute_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Remaining -= 60;
+            ViewModel.RemoveMinute();
+        }
+
+        private void ButtonUnsanitised_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Unsanitised();
+        }
+
+        private void ButtonSanitised_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Sanitised();
+        }
+        private void ButtonBroken_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Broken();
+        }
+
+        private void ButtonFixed_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Fixed();
         }
     }
 }

@@ -14,7 +14,7 @@
             Spacing="10">
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            
+
             <ProgressRing x:Name="TimerProgress" Width="500" Height="500" IsIndeterminate="False"
                     Value="{x:Bind ViewModel.Progress, Mode=OneWay}"
                     Foreground="{x:Bind ViewModel.ProgressColor, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
@@ -22,37 +22,41 @@
 
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnDefinitions="Auto, *, Auto"
                     RowDefinitions="Auto, *, Auto">
-                
-                <Button x:Name="ButtonKnock" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Knock">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Bullhorn" />
+                <Grid.Resources>
+                    <CornerRadius x:Key="ControlCornerRadius">24</CornerRadius>
+                </Grid.Resources>
+
+
+                <Button Width="80" Height="80" Grid.Column="0" Grid.Row="0" ToolTipService.ToolTip="Knock"
+                        CornerRadius="40">
+                    <fa:SvgAwesome Width="40" Icon="Solid_Bullhorn" />
                 </Button>
 
-                <Button x:Name="ButtonSettings" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Settings">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Sliders" />
+
+                <Button Width="48" Height="48" Grid.Column="2" Grid.Row="0" ToolTipService.ToolTip="Settings"
+                        VerticalAlignment="Top">
+                    <fa:SvgAwesome Width="24" Icon="Solid_Sliders" />
                 </Button>
 
-                <Button x:Name="ButtonSanitised" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Mark as Unsanitised">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Soap" />
+                <Button Width="48" Height="48" Grid.Column="0" Grid.Row="2" ToolTipService.ToolTip="Mark as Unsanitised"
+                        Click="ButtonUnsanitised_Click">
+                    <fa:SvgAwesome Width="24" Icon="Solid_Soap" />
                 </Button>
 
-                <Button x:Name="ButtonMaintenance" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Mark as In Maintenance">
-                    <fa:SvgAwesome Width="32" Icon="Solid_ScrewdriverWrench" />
+                <Button Width="48" Height="48" Grid.Column="2" Grid.Row="2" ToolTipService.ToolTip="Mark as Broken"
+                        Click="ButtonBroken_Click">
+                    <fa:SvgAwesome Width="24" Icon="Solid_ScrewdriverWrench" />
                 </Button>
-                
+
             </Grid>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ColumnDefinitions="Auto, Auto"
-                    RowDefinitions="Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="10">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2"
-                        Grid.Row="0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
                     <TextBlock FontSize="72"
                             Foreground="{x:Bind ViewModel.Color, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
                             Text="{x:Bind ViewModel.Remaining, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
+
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <TextBlock FontSize="24" Foreground="Gray" Margin="0,0,2,0">/</TextBlock>
                         <TextBlock FontSize="24" Foreground="Gray"
@@ -60,39 +64,58 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
-                        ToolTipService.ToolTip="Add 1 Minute" Click="ButtonAddMinute_Click"
-                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Plus" />
-                </Button>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ColumnDefinitions="Auto, Auto"
+                        RowDefinitions="Auto, Auto" ColumnSpacing="10" RowSpacing="10" Margin="10"
+                        Visibility="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
 
-                <Button Width="64" Height="64" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
-                        ToolTipService.ToolTip="Remove 1 Minute" Click="ButtonRemoveMinute_Click"
-                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Minus" />
-                </Button>
+                    <Button Width="64" Height="64" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right"
+                            ToolTipService.ToolTip="Add 1 Minute" Click="ButtonAddMinute_Click">
+                        <fa:SvgAwesome Width="32" Icon="Solid_Plus" />
+                    </Button>
 
-                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"
-                        ToolTipService.ToolTip="Play" Click="ButtonPlay_Click"
-                        Visibility="{x:Bind ViewModel.IsNotPlaying, Mode=OneWay}"
-                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Play" />
-                </Button>
+                    <Button Width="64" Height="64" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
+                            ToolTipService.ToolTip="Remove 1 Minute" Click="ButtonRemoveMinute_Click">
+                        <fa:SvgAwesome Width="32" Icon="Solid_Minus" />
+                    </Button>
 
-                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"
-                        ToolTipService.ToolTip="Pause" Click="ButtonPause_Click"
-                        Visibility="{x:Bind ViewModel.IsPlaying, Mode=OneWay}">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Pause" />
-                </Button>
+                    <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
+                            ToolTipService.ToolTip="Play" Click="ButtonPlay_Click"
+                            Visibility="{x:Bind ViewModel.IsNotPlaying, Mode=OneWay}">
+                        <fa:SvgAwesome Width="32" Icon="Solid_Play" />
+                    </Button>
 
-                <Button Width="64" Height="64" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"
-                        ToolTipService.ToolTip="Stop" Click="ButtonStop_Click">
-                    <fa:SvgAwesome Width="32" Icon="Solid_Stop" />
-                </Button>
-                
-            </Grid>
-            
+                    <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
+                            ToolTipService.ToolTip="Pause" Click="ButtonPause_Click"
+                            Visibility="{x:Bind ViewModel.IsPlaying, Mode=OneWay}">
+                        <fa:SvgAwesome Width="32" Icon="Solid_Pause" />
+                    </Button>
+
+                    <Button Width="64" Height="64" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
+                            ToolTipService.ToolTip="Stop" Click="ButtonStop_Click">
+                        <fa:SvgAwesome Width="32" Icon="Solid_Stop" />
+                    </Button>
+
+                </Grid>
+
+                <Grid Width="160" Height="138" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        RowDefinitions="Auto, Auto, *, Auto" ColumnDefinitions="Auto" RowSpacing="10" Margin="10"
+                        Visibility="{x:Bind ViewModel.IsUnsanitised, Mode=OneWay}">
+                    <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontWeight="Bold">Needs Sanitisation</TextBlock>
+                    <TextBlock Width="160" Grid.Row="1" Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap">Please confirm once the headset is clean.</TextBlock>
+                    <Button Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Click="ButtonSanitised_Click">Sanitised</Button>
+                </Grid>
+
+                <Grid Width="160" Height="138" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        RowDefinitions="Auto, *, Auto" ColumnDefinitions="Auto" RowSpacing="10" Margin="10"
+                        Visibility="{x:Bind ViewModel.IsBroken, Mode=OneWay}">
+                    <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontWeight="Bold">Needs Fixing</TextBlock>
+                    <TextBlock Width="160" Grid.Row="1" Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap">Please confirm once the headset is fixed.</TextBlock>
+                    <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Click="ButtonFixed_Click">Fixed</Button>
+                </Grid>
+
+            </StackPanel>
+
         </Grid>
-        
+
     </StackPanel>
 </Page>
