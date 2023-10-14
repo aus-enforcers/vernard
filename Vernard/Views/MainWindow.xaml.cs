@@ -26,6 +26,15 @@ namespace Vernard.Views
             appWindow.SetIcon("Assets/icon.ico");
             appWindow.Resize(new SizeInt32(540, 560));
 
+            DisplayArea displayArea = DisplayArea.GetFromWindowId(wndId, DisplayAreaFallback.Nearest);
+            if (displayArea is not null)
+            {
+                PointInt32 position = appWindow.Position;
+                position.X = (displayArea.WorkArea.Width - appWindow.Size.Width);
+                position.Y = (displayArea.WorkArea.Height - appWindow.Size.Height);
+                appWindow.Move(position);
+            }
+
             ApplicationFrame.Navigate(typeof(MainPage));
         }
     }
