@@ -23,6 +23,7 @@ namespace Vernard.Views
             appPresenter.IsMaximizable = false;
             appPresenter.IsResizable = false;
 
+            appWindow.SetIcon("Assets/icon.ico");
             appWindow.Resize(new SizeInt32(540, 560));
 
             ApplicationFrame.Navigate(typeof(MainPage));
