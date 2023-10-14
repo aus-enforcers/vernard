@@ -3,24 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="using:FontAwesome6.Svg"
-        xmlns:views="using:Vernard.Views" mc:Ignorable="d">
+        xmlns:converters="using:Vernard.Views.Converters" mc:Ignorable="d">
 
     <Page.Resources>
-        <views:IntToTimeSpanConverter x:Key="IntToTimeSpanConverter" />
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <converters:IntToTimeSpanConverter x:Key="IntToTimeSpanConverter" />
     </Page.Resources>
 
     <StackPanel DataContext="this" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
             Spacing="10">
 
-        <!-- overlapping content with a simple grid -->
-
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            
             <ProgressRing x:Name="TimerProgress" Width="500" Height="500" IsIndeterminate="False"
-                    Value="{x:Bind ViewModel.TimeLeftPercent, Mode=OneWay}" Foreground="DarkGoldenrod"
+                    Value="{x:Bind ViewModel.Progress, Mode=OneWay}"
+                    Foreground="{x:Bind ViewModel.ProgressColor, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
                     Background="LightGray"></ProgressRing>
 
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnDefinitions="Auto, *, Auto"
                     RowDefinitions="Auto, *, Auto">
+                
                 <Button x:Name="ButtonKnock" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch"
                         ToolTipService.ToolTip="Knock">
                     <fa:SvgAwesome Width="32" Icon="Solid_Bullhorn" />
@@ -31,15 +33,16 @@
                     <fa:SvgAwesome Width="32" Icon="Solid_Sliders" />
                 </Button>
 
-                <ToggleButton x:Name="ButtonSanitised" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Sanitised">
+                <Button x:Name="ButtonSanitised" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
+                        ToolTipService.ToolTip="Mark as Unsanitised">
                     <fa:SvgAwesome Width="32" Icon="Solid_Soap" />
-                </ToggleButton>
+                </Button>
 
-                <ToggleButton x:Name="ButtonMaintenance" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Maintenance">
+                <Button x:Name="ButtonMaintenance" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch"
+                        ToolTipService.ToolTip="Mark as In Maintenance">
                     <fa:SvgAwesome Width="32" Icon="Solid_ScrewdriverWrench" />
-                </ToggleButton>
+                </Button>
+                
             </Grid>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ColumnDefinitions="Auto, Auto"
@@ -47,36 +50,49 @@
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2"
                         Grid.Row="0">
-                    <TextBlock x:Name="TimerDisplay"
-                            Text="{x:Bind ViewModel.TimeLeft, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
+                    <TextBlock FontSize="72"
+                            Foreground="{x:Bind ViewModel.Color, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
+                            Text="{x:Bind ViewModel.Remaining, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock FontSize="24" Foreground="Gray" Margin="0,0,2,0">/</TextBlock>
+                        <TextBlock FontSize="24" Foreground="Gray"
+                                Text="{x:Bind ViewModel.Total, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
+                    </StackPanel>
                 </StackPanel>
 
-                <Button x:Name="ButtonAddMinute" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Add 1 Minute">
+                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
+                        ToolTipService.ToolTip="Add 1 Minute" Click="ButtonAddMinute_Click"
+                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
                     <fa:SvgAwesome Width="32" Icon="Solid_Plus" />
                 </Button>
 
-                <Button x:Name="ButtonRemoveMinute" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Remove 1 Minute">
+                <Button Width="64" Height="64" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
+                        ToolTipService.ToolTip="Remove 1 Minute" Click="ButtonRemoveMinute_Click"
+                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
                     <fa:SvgAwesome Width="32" Icon="Solid_Minus" />
                 </Button>
 
-                <Button x:Name="ButtonPlay" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Play" Click="ButtonPlay_Click">
+                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"
+                        ToolTipService.ToolTip="Play" Click="ButtonPlay_Click"
+                        Visibility="{x:Bind ViewModel.IsNotPlaying, Mode=OneWay}"
+                        IsEnabled="{x:Bind ViewModel.IsPlayable, Mode=OneWay}">
                     <fa:SvgAwesome Width="32" Icon="Solid_Play" />
                 </Button>
 
-                <Button x:Name="ButtonPause" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                        ToolTipService.ToolTip="Pause" Click="ButtonPause_Click" Visibility="Collapsed">
+                <Button Width="64" Height="64" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"
+                        ToolTipService.ToolTip="Pause" Click="ButtonPause_Click"
+                        Visibility="{x:Bind ViewModel.IsPlaying, Mode=OneWay}">
                     <fa:SvgAwesome Width="32" Icon="Solid_Pause" />
                 </Button>
 
-                <Button x:Name="ButtonStop" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
+                <Button Width="64" Height="64" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"
                         ToolTipService.ToolTip="Stop" Click="ButtonStop_Click">
                     <fa:SvgAwesome Width="32" Icon="Solid_Stop" />
                 </Button>
+                
             </Grid>
+            
         </Grid>
-
+        
     </StackPanel>
 </Page>

@@ -13,8 +13,8 @@ namespace Vernard.Views
         {
             this.InitializeComponent();
             ViewModel = new TimerViewModel();
-            ViewModel.TimeTotal = 900;
-            ViewModel.TimeLeft = 900;
+            ViewModel.Total = 900;
+            ViewModel.Remaining = 900;
         }
 
         private void CreateTimer()
@@ -38,9 +38,18 @@ namespace Vernard.Views
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            DispatcherQueue.TryEnqueue(ViewModel.Tick);
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                if (!ViewModel.IsPlayable)
+                {
+                    DestroyTimer();
+                }
+                else
+                {
+                    ViewModel.Tick();
+                }
+            });
         }
-
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             CreateTimer();
@@ -55,9 +64,23 @@ namespace Vernard.Views
         private void ButtonStop_Click(object sender, RoutedEventArgs e)
         {
             DestroyTimer();
-            ViewModel.TimeLeft = 900;
-            ViewModel.TimeTotal = 900;
+            ViewModel.Remaining = 900;
+            ViewModel.Total = 900;
             ViewModel.State = TimerState.Ready;
+        }
+
+        private void ButtonAddMinute_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Remaining += 60;
+            if (ViewModel.Remaining > ViewModel.Total)
+            {
+                ViewModel.Total = ViewModel.Remaining;
+            }
+        }
+
+        private void ButtonRemoveMinute_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Remaining -= 60;
         }
     }
 }

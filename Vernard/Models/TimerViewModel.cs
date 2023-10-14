@@ -1,60 +1,132 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.UI;
+using Windows.UI;
 
 namespace Vernard.Models
 {
     public class TimerViewModel : BindableBase
     {
-        private int _timeLeft;
-        public int TimeLeft
+        private int m_remaining;
+        public int Remaining
         {
-            get => _timeLeft;
+            get => m_remaining;
             set
             {
-                SetProperty(ref _timeLeft, value <= 0 ? 0 : value);
-                UpdateTimeLeftPercent();
+                SetProperty(ref m_remaining, value <= 0 ? 0 : value);
+                UpdateColor();
+                UpdateProgress();
+                UpdateProgressColor();
             }
         }
 
-        private int _timeTotal;
-        public int TimeTotal
+        private int m_total;
+        public int Total
         {
-            get => _timeTotal;
+            get => m_total;
             set
             {
-                SetProperty(ref _timeTotal, value <= 0 ? 0 : value);
-                UpdateTimeLeftPercent();
+                SetProperty(ref m_total, value <= 0 ? 0 : value);
+                UpdateProgress();
             }
         }
 
-        private double _timeLeftPercent;
-        public double TimeLeftPercent
+        private double m_progress;
+        public double Progress
         {
-            get => _timeLeftPercent;
-            set => SetProperty(ref _timeLeftPercent, value <= 0 ? 0 : (value >= 100 ? 100 : value));
+            get => m_progress;
+            set => SetProperty(ref m_progress, value <= 0 ? 0 : (value >= 100 ? 100 : value));
         }
 
-        private TimerState _state;
+        private TimerState m_state;
         public TimerState State
         {
-            get => _state;
-            set => SetProperty(ref _state, value);
+            get => m_state;
+            set
+            {
+                SetProperty(ref m_state, value);
+                UpdateColor();
+                UpdateIsPlaying();
+                UpdateIsNotPlaying();
+                UpdateIsPlayable();
+            }
         }
+
+        private bool m_isPlaying;
+        public bool IsPlaying { get => m_isPlaying; set => SetProperty(ref m_isPlaying, value); }
+
+        private bool m_isNotPlaying;
+        public bool IsNotPlaying { get => m_isNotPlaying; set => SetProperty(ref m_isNotPlaying, value); }
+
+        private bool m_isPlayable;
+        public bool IsPlayable { get => m_isPlayable; set => SetProperty(ref m_isPlayable, value); }
+
+        private Color m_color;
+        public Color Color { get => m_color; set => SetProperty(ref m_color, value); }
+
+        private Color m_progressColor;
+        public Color ProgressColor { get => m_progressColor; set => SetProperty(ref m_progressColor, value); }
 
         internal TimerViewModel()
         {
-            TimeLeft = 0;
-            TimeTotal = 0;
+            Remaining = 0;
+            Total = 0;
             State = TimerState.Ready;
         }
 
         internal void Tick()
         {
-            TimeLeft -= 1;
+            Remaining -= 1;
+            if (Remaining == 0)
+            {
+                State = TimerState.Unclean;
+            }
         }
 
-        private void UpdateTimeLeftPercent()
+        private void UpdateProgress()
         {
-            TimeLeftPercent = TimeTotal > 0 ? ((double)TimeLeft / (double)TimeTotal * 100) : 0;
+            Progress = Total > 0 ? ((double)Remaining / (double)Total * 100) : 0;
+        }
+
+        private void UpdateIsPlaying()
+        {
+            IsPlaying = State == TimerState.Playing;
+        }
+
+        private void UpdateIsNotPlaying()
+        {
+            IsNotPlaying = State != TimerState.Playing;
+        }
+
+        private void UpdateIsPlayable()
+        {
+            IsPlayable = State == TimerState.Ready || State == TimerState.Playing || State == TimerState.Paused;
+        }
+
+        private void UpdateColor()
+        {
+            switch (State)
+            {
+                case TimerState.Unclean:
+                case TimerState.Maintenance:
+                    Color = Colors.Orange;
+                    break;
+
+                case TimerState.Ready:
+                    Color = Colors.Blue;
+                    break;
+
+                case TimerState.Playing:
+                case TimerState.Paused:
+                    Color = Remaining > 30 ? Colors.Green : Colors.Red;
+                    break;
+
+                default:
+                    throw new System.Exception($"Unknown state value {State}");
+            }
+        }
+
+        private void UpdateProgressColor()
+        {
+            ProgressColor = Remaining > 30 ? Colors.DarkGoldenrod : Colors.Red;
         }
     }
 }
