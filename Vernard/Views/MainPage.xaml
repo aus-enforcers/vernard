@@ -41,7 +41,7 @@
 
 
                 <Button Width="48" Height="48" Grid.Column="2" Grid.Row="0" ToolTipService.ToolTip="Settings"
-                        VerticalAlignment="Top">
+                        VerticalAlignment="Top" Click="ButtonSettings_Click">
                     <Button.Resources>
                         <!-- slate-700, -600, -500 -->
                         <SolidColorBrush x:Key="ButtonBackground" Color="#334155" />

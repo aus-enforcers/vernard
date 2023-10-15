@@ -1,21 +1,24 @@
 ﻿using Microsoft.UI.Xaml;
+using Vernard.Models;
 using Vernard.Views;
 
 namespace Vernard
 {
     public partial class App : Application
     {
-        private Window ApplicationWindow { get; set; }
-
+        internal TimerAppModel ApplicationModel { get; init; }
+     
         public App()
         {
             this.InitializeComponent();
+            ApplicationModel = new TimerAppModel();
+            ApplicationModel.Load();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            ApplicationWindow = new MainWindow();
-            ApplicationWindow.Activate();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Activate();
         }
 
     }

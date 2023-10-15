@@ -1,18 +1,26 @@
 using Microsoft.UI.Xaml;
 using System.Timers;
 using Vernard.Models;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Windowing;
+using Microsoft.UI;
+using System;
+using WinRT.Interop;
 
 namespace Vernard.Views
 {
     internal sealed partial class MainPage
     {
+        private SettingsWindow SettingsWindow { get; set; }
         private Timer Timer { get; set; }
         private TimerViewModel ViewModel { get; set; }
+        private TimerAppModel ApplicationModel { get => (Application.Current as App).ApplicationModel; }
 
         internal MainPage()
         {
             this.InitializeComponent();
-            ViewModel = new TimerViewModel(900);
+            ViewModel = new TimerViewModel();
+            ApplicationModel.OnLoad += delegate { ViewModel.Load(); };
         }
 
         private void CreateTimer()
@@ -92,6 +100,23 @@ namespace Vernard.Views
         private void ButtonFixed_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Fixed();
+        }
+
+        private void ButtonSettings_Click(object sender, RoutedEventArgs e)
+        {
+            if (SettingsWindow == null)
+            {
+                SettingsWindow = new SettingsWindow();
+                SettingsWindow.Activate();
+                SettingsWindow.Closed += delegate
+                {
+                    SettingsWindow = null;
+                };
+            }
+            else
+            {
+                SettingsWindow.AppWindow.MoveInZOrderAtTop();
+            }
         }
     }
 }
