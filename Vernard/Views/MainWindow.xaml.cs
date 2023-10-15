@@ -7,9 +7,9 @@ using WinRT.Interop;
 
 namespace Vernard.Views
 {
-    public sealed partial class MainWindow : Window
+    internal sealed partial class MainWindow : Window
     {
-        public MainWindow()
+        internal MainWindow()
         {
             this.InitializeComponent();
 
@@ -18,8 +18,7 @@ namespace Vernard.Views
             AppWindow appWindow = AppWindow.GetFromWindowId(wndId);
 
             OverlappedPresenter appPresenter = appWindow.Presenter as OverlappedPresenter;
-            // todo: uncomment
-            //appPresenter.IsAlwaysOnTop = true;
+            appPresenter.IsAlwaysOnTop = true;
             appPresenter.IsMaximizable = false;
             appPresenter.IsResizable = false;
 

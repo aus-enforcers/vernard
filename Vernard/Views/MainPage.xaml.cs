@@ -4,12 +4,12 @@ using Vernard.Models;
 
 namespace Vernard.Views
 {
-    public sealed partial class MainPage
+    internal sealed partial class MainPage
     {
         private Timer Timer { get; set; }
-        public TimerViewModel ViewModel { get; set; }
+        private TimerViewModel ViewModel { get; set; }
 
-        public MainPage()
+        internal MainPage()
         {
             this.InitializeComponent();
             ViewModel = new TimerViewModel(900);
@@ -44,11 +44,13 @@ namespace Vernard.Views
                 }
             });
         }
+
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             CreateTimer();
             ViewModel.Play();
         }
+
         private void ButtonPause_Click(object sender, RoutedEventArgs e)
         {
             DestroyTimer();
@@ -81,6 +83,7 @@ namespace Vernard.Views
         {
             ViewModel.Sanitised();
         }
+
         private void ButtonBroken_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Broken();

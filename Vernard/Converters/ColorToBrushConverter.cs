@@ -1,18 +1,20 @@
 ﻿using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
 using System;
+using Windows.UI;
 
-namespace Vernard.Views.Converters
+namespace Vernard.Converters
 {
-    internal class IntToTimeSpanConverter : IValueConverter
+    internal class ColorToBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return string.Format("{0:mm\\:ss}", TimeSpan.FromSeconds((int)value));
+            return new SolidColorBrush((Color)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException("IntToTimeSpanConverter only supports OneTime and OneWay binding modes");
+            return ((SolidColorBrush)value).Color;
         }
     }
 }

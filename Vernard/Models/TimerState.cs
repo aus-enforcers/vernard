@@ -1,6 +1,6 @@
 ﻿namespace Vernard.Models
 {
-    public enum TimerState
+    internal enum TimerState
     {
         Ready,
         Playing,

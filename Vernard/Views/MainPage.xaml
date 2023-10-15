@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="using:FontAwesome6.Svg"
-        xmlns:converters="using:Vernard.Views.Converters" mc:Ignorable="d">
+        xmlns:converters="using:Vernard.Converters" mc:Ignorable="d">
 
     <Page.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
@@ -15,10 +15,11 @@
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
+            <!-- slate-400 -->
             <ProgressRing x:Name="TimerProgress" Width="500" Height="500" IsIndeterminate="False"
                     Value="{x:Bind ViewModel.Progress, Mode=OneWay}"
-                    Foreground="{x:Bind ViewModel.ProgressColor, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
-                    Background="LightGray"></ProgressRing>
+                    Foreground="{x:Bind ViewModel.ProgressForeground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
+                    Background="{x:Bind ViewModel.ProgressBackground, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}" />
 
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnDefinitions="Auto, *, Auto"
                     RowDefinitions="Auto, *, Auto">
@@ -29,22 +30,46 @@
 
                 <Button Width="80" Height="80" Grid.Column="0" Grid.Row="0" ToolTipService.ToolTip="Knock"
                         CornerRadius="40">
+                    <Button.Resources>
+                        <!-- blue-700, -600, -500 -->
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#1d4ed8" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#2563eb" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#3b82f6" />
+                    </Button.Resources>
                     <fa:SvgAwesome Width="40" Icon="Solid_Bullhorn" />
                 </Button>
 
 
                 <Button Width="48" Height="48" Grid.Column="2" Grid.Row="0" ToolTipService.ToolTip="Settings"
                         VerticalAlignment="Top">
+                    <Button.Resources>
+                        <!-- slate-700, -600, -500 -->
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#334155" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#475569" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#64748b" />
+                    </Button.Resources>
                     <fa:SvgAwesome Width="24" Icon="Solid_Sliders" />
                 </Button>
 
                 <Button Width="48" Height="48" Grid.Column="0" Grid.Row="2" ToolTipService.ToolTip="Mark as Unsanitised"
                         Click="ButtonUnsanitised_Click">
+                    <Button.Resources>
+                        <!-- amber-700, -600, -500 -->
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#b45309" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#d97706" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#f59e0b" />
+                    </Button.Resources>
                     <fa:SvgAwesome Width="24" Icon="Solid_Soap" />
                 </Button>
 
                 <Button Width="48" Height="48" Grid.Column="2" Grid.Row="2" ToolTipService.ToolTip="Mark as Broken"
                         Click="ButtonBroken_Click">
+                    <Button.Resources>
+                        <!-- purple-700, -600, -500 -->
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#7e22ce" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#9333ea" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#a855f7" />
+                    </Button.Resources>
                     <fa:SvgAwesome Width="24" Icon="Solid_ScrewdriverWrench" />
                 </Button>
 
@@ -52,14 +77,40 @@
 
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
+                <StackPanel Height="20" Margin="0, 0, 0, -20">
+                    <TextBlock TextAlignment="Center" Foreground="#64748b"
+                            Visibility="{x:Bind ViewModel.IsReady, Mode=OneWay}">
+                        Ready
+                    </TextBlock>
+                    <TextBlock TextAlignment="Center" Foreground="#64748b"
+                            Visibility="{x:Bind ViewModel.IsPlaying, Mode=OneWay}"> 
+                        Playing
+                    </TextBlock>
+                    <TextBlock TextAlignment="Center" Foreground="#64748b"
+                            Visibility="{x:Bind ViewModel.IsPaused, Mode=OneWay}"> 
+                        Paused
+                    </TextBlock>
+
+                    <TextBlock TextAlignment="Center" Foreground="#64748b"
+                            Visibility="{x:Bind ViewModel.IsUnsanitised, Mode=OneWay}">
+                        Unsanitised
+                    </TextBlock>
+
+                    <TextBlock TextAlignment="Center" Foreground="#64748b"
+                            Visibility="{x:Bind ViewModel.IsBroken, Mode=OneWay}">
+                        Broken
+                    </TextBlock>
+                </StackPanel>
+
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
                     <TextBlock FontSize="72"
                             Foreground="{x:Bind ViewModel.Color, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}}"
                             Text="{x:Bind ViewModel.Remaining, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
 
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock FontSize="24" Foreground="Gray" Margin="0,0,2,0">/</TextBlock>
-                        <TextBlock FontSize="24" Foreground="Gray"
+                        <!-- slate-500 -->
+                        <TextBlock FontSize="24" Margin="0,0,2,0" Foreground="#64748b">/</TextBlock>
+                        <TextBlock FontSize="24" Foreground="#64748b"
                                 Text="{x:Bind ViewModel.Total, Mode=OneWay, Converter={StaticResource IntToTimeSpanConverter}}" />
                     </StackPanel>
                 </StackPanel>
@@ -70,28 +121,48 @@
 
                     <Button Width="64" Height="64" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right"
                             ToolTipService.ToolTip="Add 1 Minute" Click="ButtonAddMinute_Click">
-                        <fa:SvgAwesome Width="32" Icon="Solid_Plus" />
+                        <!-- green-700 -->
+                        <fa:SvgAwesome Width="32" Icon="Solid_Plus" PrimaryColor="#15803d"/>
                     </Button>
 
                     <Button Width="64" Height="64" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
                             ToolTipService.ToolTip="Remove 1 Minute" Click="ButtonRemoveMinute_Click">
-                        <fa:SvgAwesome Width="32" Icon="Solid_Minus" />
+                        <!-- red-700 -->
+                        <fa:SvgAwesome Width="32" Icon="Solid_Minus" PrimaryColor="#b91c1c" />
                     </Button>
 
                     <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
                             ToolTipService.ToolTip="Play" Click="ButtonPlay_Click"
                             Visibility="{x:Bind ViewModel.IsNotPlaying, Mode=OneWay}">
+                        <Button.Resources>
+                            <!-- green-700, -600, -500 -->
+                            <SolidColorBrush x:Key="ButtonBackground" Color="#15803d" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#16a34a" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#22c55e" />
+                        </Button.Resources>
                         <fa:SvgAwesome Width="32" Icon="Solid_Play" />
                     </Button>
 
                     <Button Width="64" Height="64" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"
                             ToolTipService.ToolTip="Pause" Click="ButtonPause_Click"
                             Visibility="{x:Bind ViewModel.IsPlaying, Mode=OneWay}">
+                        <Button.Resources>
+                            <!-- blue-700, -600, -500 -->
+                            <SolidColorBrush x:Key="ButtonBackground" Color="#1d4ed8" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#2563eb" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#3b82f6" />
+                        </Button.Resources>
                         <fa:SvgAwesome Width="32" Icon="Solid_Pause" />
                     </Button>
 
                     <Button Width="64" Height="64" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
                             ToolTipService.ToolTip="Stop" Click="ButtonStop_Click">
+                        <Button.Resources>
+                            <!-- red-700, -600, -500 -->
+                            <SolidColorBrush x:Key="ButtonBackground" Color="#b91c1c" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#dc2626" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#ef4444" />
+                        </Button.Resources>
                         <fa:SvgAwesome Width="32" Icon="Solid_Stop" />
                     </Button>
 
@@ -112,6 +183,8 @@
                     <TextBlock Width="160" Grid.Row="1" Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap">Please confirm once the headset is fixed.</TextBlock>
                     <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Click="ButtonFixed_Click">Fixed</Button>
                 </Grid>
+
+
 
             </StackPanel>
 
