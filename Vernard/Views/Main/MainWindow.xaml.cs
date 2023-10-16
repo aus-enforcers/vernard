@@ -10,20 +10,21 @@ namespace Vernard.Views
 {
     internal sealed partial class MainWindow : Window
     {
-        private TimerAppModel ApplicationModel { get => (Application.Current as App).ApplicationModel; }
         internal MainWindow()
         {
             this.InitializeComponent();
+
+            var appModel = App.GetApplicationModel();
 
             var appWindow = GetAppWindow();
             appWindow.SetIcon("Assets/icon.ico");
             appWindow.Resize(new SizeInt32(540, 560));
 
             var appPresenter = GetAppPresenter(appWindow);
-            appPresenter.IsAlwaysOnTop = ApplicationModel.AlwaysOnTop;
+            appPresenter.IsAlwaysOnTop = appModel.AlwaysOnTop;
             appPresenter.IsMaximizable = false;
             appPresenter.IsResizable = false;
-            ApplicationModel.OnLoad += ApplicationModel_OnLoad;
+            appModel.OnReload += ApplicationModel_OnLoad;
 
             var displayArea = GetDisplayArea();
             if (displayArea is not null)
@@ -42,7 +43,7 @@ namespace Vernard.Views
             var appWindow = GetAppWindow();
             if (appWindow != null)
             {
-                GetAppPresenter(appWindow).IsAlwaysOnTop = ApplicationModel.AlwaysOnTop;
+                GetAppPresenter(appWindow).IsAlwaysOnTop = App.GetApplicationModel().AlwaysOnTop;
             }
         }
 

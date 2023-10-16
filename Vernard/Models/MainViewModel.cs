@@ -4,9 +4,8 @@ using Microsoft.UI.Xaml;
 
 namespace Vernard.Models
 {
-    internal class TimerViewModel : BindableBase
+    internal class MainViewModel : BindableBase
     {
-        private TimerAppModel ApplicationModel { get => (Application.Current as App).ApplicationModel; }
         private int DefaultTime { get; set; }
 
         private int m_remaining;
@@ -91,14 +90,14 @@ namespace Vernard.Models
         private Color m_progressBackground;
         internal Color ProgressBackground { get => m_progressBackground; set => SetProperty(ref m_progressBackground, value); }
 
-        internal TimerViewModel()
+        internal MainViewModel()
         {
             Load();
         }
 
         internal void Load()
         {
-            DefaultTime = ApplicationModel.DefaultTime;
+            DefaultTime = App.GetApplicationModel().DefaultTime;
             Ready();
         }
 

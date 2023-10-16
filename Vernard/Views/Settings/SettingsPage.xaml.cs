@@ -8,7 +8,6 @@ namespace Vernard.Views
 {
     internal sealed partial class SettingsPage : Page
     {
-        private TimerAppModel ApplicationModel { get => (Application.Current as App).ApplicationModel; }
         private SettingsViewModel ViewModel { get; set; }
         private Action CloseAction { get; set; }
 
@@ -16,7 +15,7 @@ namespace Vernard.Views
         {
             this.InitializeComponent();
             ViewModel = new SettingsViewModel();
-            ApplicationModel.OnLoad += delegate { ViewModel.Load(); };
+            App.GetApplicationModel().OnReload += delegate { ViewModel.Load(); };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs eventArgs)

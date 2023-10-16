@@ -13,10 +13,13 @@
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-	<None Remove="Views\MainWindow.xaml" />
-	<None Remove="Views\MainPage.xaml" />
-	<None Remove="Views\SettingsWindow.xaml" />
-	<None Remove="Views\SettingsPage.xaml" />
+	<None Remove="Views\Main\MainWindow.xaml" />
+	<None Remove="Views\Main\MainPage.xaml" />
+	<None Remove="Views\Settings\SettingsWindow.xaml" />
+	<None Remove="Views\Settings\SettingsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="TimerApplication.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,24 +44,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\MainWindow.xaml">
+    <Page Update="Views\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\MainPage.xaml">
+    <Page Update="Views\Main\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\SettingsWindow.xaml">
+    <Page Update="Views\Settings\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\SettingsPage.xaml">
+    <Page Update="Views\Settings\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Main\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

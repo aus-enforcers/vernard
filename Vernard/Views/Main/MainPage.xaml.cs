@@ -13,14 +13,13 @@ namespace Vernard.Views
     {
         private SettingsWindow SettingsWindow { get; set; }
         private Timer Timer { get; set; }
-        private TimerViewModel ViewModel { get; set; }
-        private TimerAppModel ApplicationModel { get => (Application.Current as App).ApplicationModel; }
+        private MainViewModel ViewModel { get; set; }
 
         internal MainPage()
         {
             this.InitializeComponent();
-            ViewModel = new TimerViewModel();
-            ApplicationModel.OnLoad += delegate { ViewModel.Load(); };
+            ViewModel = new MainViewModel();
+            App.GetApplicationModel().OnReload += delegate { ViewModel.Load(); };
         }
 
         private void CreateTimer()

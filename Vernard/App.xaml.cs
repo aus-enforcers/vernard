@@ -6,12 +6,12 @@ namespace Vernard
 {
     public partial class App : Application
     {
-        internal TimerAppModel ApplicationModel { get; init; }
+        internal ApplicationModel ApplicationModel { get; init; }
      
         public App()
         {
             this.InitializeComponent();
-            ApplicationModel = new TimerAppModel();
+            ApplicationModel = new ApplicationModel();
             ApplicationModel.Load();
         }
 
@@ -21,5 +21,9 @@ namespace Vernard
             mainWindow.Activate();
         }
 
+        internal static ApplicationModel GetApplicationModel()
+        {
+            return (Current as App).ApplicationModel;
+        }
     }
 }
