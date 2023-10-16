@@ -5,7 +5,7 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap">
 
-  <Identity Name="601de915-4ed0-4038-9d9c-27d64dd695c8" Publisher="CN=yellow-corps" Version="2.0.0.0" />
+  <Identity Name="YellowCorps.Vernard" Publisher="CN=yellow-corps" Version="2.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="601de915-4ed0-4038-9d9c-27d64dd695c8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

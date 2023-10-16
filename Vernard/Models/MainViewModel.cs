@@ -113,6 +113,11 @@ namespace Vernard.Models
 
         internal bool Tick()
         {
+            if (State != TimerState.Playing)
+            {
+                return false;
+            }
+
             Remaining -= 1;
             if (Remaining == 0)
             {
