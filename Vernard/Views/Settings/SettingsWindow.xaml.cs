@@ -2,10 +2,9 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using System;
-using Vernard.Models;
 using WinRT.Interop;
 
-namespace Vernard.Views
+namespace Vernard.Views.Settings
 {
     internal sealed partial class SettingsWindow : Window
     {

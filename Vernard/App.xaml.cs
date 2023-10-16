@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Vernard.Models;
-using Vernard.Views;
+using Vernard.Views.Main;
 
 namespace Vernard
 {

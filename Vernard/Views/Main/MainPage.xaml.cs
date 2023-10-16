@@ -1,13 +1,9 @@
 using Microsoft.UI.Xaml;
 using System.Timers;
 using Vernard.Models;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Windowing;
-using Microsoft.UI;
-using System;
-using WinRT.Interop;
+using Vernard.Views.Settings;
 
-namespace Vernard.Views
+namespace Vernard.Views.Main
 {
     internal sealed partial class MainPage
     {

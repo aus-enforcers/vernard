@@ -4,9 +4,8 @@ using Microsoft.UI.Xaml;
 using System;
 using Windows.Graphics;
 using WinRT.Interop;
-using Vernard.Models;
 
-namespace Vernard.Views
+namespace Vernard.Views.Main
 {
     internal sealed partial class MainWindow : Window
     {

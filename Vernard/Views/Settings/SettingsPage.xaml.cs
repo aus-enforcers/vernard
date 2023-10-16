@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using Vernard.Models;
 
-namespace Vernard.Views
+namespace Vernard.Views.Settings
 {
     internal sealed partial class SettingsPage : Page
     {

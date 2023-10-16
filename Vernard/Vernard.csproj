@@ -19,7 +19,7 @@
 	<None Remove="Views\Settings\SettingsPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Remove="TimerApplication.xaml" />
+    <Page Remove="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>
