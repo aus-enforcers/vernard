@@ -1,43 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Page x:Class="Vernard.Views.Settings.SettingsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="using:FontAwesome6.Svg"
-        mc:Ignorable="d">
-    <NavigationView x:Name="NavigationView" Header="General Settings" IsSettingsVisible="False"
-            IsBackButtonVisible="Collapsed" ItemInvoked="NavigationView_ItemInvoked">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="Vernard.Views.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="using:FontAwesome6.Svg"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <NavigationView
+        x:Name="NavigationView"
+        Header="General Settings"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        ItemInvoked="NavigationView_ItemInvoked">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="General" Icon="Clock" IsSelected="True" Tag="GeneralSettings" />
-            <NavigationViewItem Content="Beacon" Icon="Send" Tag="BeaconSettings" />
+            <NavigationViewItem
+                Content="General"
+                Icon="Clock"
+                IsSelected="True"
+                Tag="GeneralSettings" />
+            <NavigationViewItem
+                Content="Beacon"
+                Icon="Send"
+                Tag="BeaconSettings" />
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
-            <NavigationViewItem Content="About" Icon="Help" Tag="About" />
+            <NavigationViewItem
+                Content="About"
+                Icon="Help"
+                Tag="About" />
         </NavigationView.FooterMenuItems>
 
         <Grid Margin="24" RowDefinitions="*, Auto">
-            <ScrollView Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="0">
+            <ScrollView Grid.Row="0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <StackPanel x:Name="SettingsPanels">
-                    <StackPanel x:Name="GeneralSettings" Margin="10" Spacing="10">
-                        <TextBox Header="Default Time" HorizontalAlignment="Left"
-                                Text="{x:Bind ViewModel.DefaultTime, Mode=TwoWay}" />
+                    <StackPanel
+                        x:Name="GeneralSettings"
+                        Margin="10"
+                        Spacing="10">
+                        <TextBox
+                            HorizontalAlignment="Left"
+                            Header="Default Time"
+                            Text="{x:Bind ViewModel.DefaultTime, Mode=TwoWay}" />
                         <CheckBox Content="Always On Top" IsChecked="{x:Bind ViewModel.AlwaysOnTop, Mode=TwoWay}" />
                         <CheckBox Content="Open At Login" IsChecked="{x:Bind ViewModel.OpenAtLogin, Mode=TwoWay}" />
                         <CheckBox Content="Play Warnings" IsChecked="{x:Bind ViewModel.PlayWarnings, Mode=TwoWay}" />
                     </StackPanel>
 
-                    <StackPanel x:Name="BeaconSettings" Visibility="Collapsed" Margin="10" Spacing="10">
+                    <StackPanel
+                        x:Name="BeaconSettings"
+                        Margin="10"
+                        Spacing="10"
+                        Visibility="Collapsed">
                         <CheckBox Content="Send Beacon" IsChecked="{x:Bind ViewModel.SendBeacon, Mode=TwoWay}" />
-                        <TextBox Header="Beacon URL" HorizontalAlignment="Left"
-                                Text="{x:Bind ViewModel.BeaconUrl, Mode=TwoWay}" />
-                        <TextBox Header="Beacon Interval" HorizontalAlignment="Left"
-                                Text="{x:Bind ViewModel.BeaconInterval, Mode=TwoWay}" />
-                        <TextBox Header="Beacon Identifier" HorizontalAlignment="Left"
-                                Text="{x:Bind ViewModel.BeaconIdentifier, Mode=TwoWay}" />
-                        <TextBox Header="Beacon Token" HorizontalAlignment="Left"
-                                Text="{x:Bind ViewModel.BeaconToken, Mode=TwoWay}" />
+                        <TextBox
+                            HorizontalAlignment="Left"
+                            Header="Beacon URL"
+                            Text="{x:Bind ViewModel.BeaconUrl, Mode=TwoWay}" />
+                        <TextBox
+                            HorizontalAlignment="Left"
+                            Header="Beacon Interval"
+                            Text="{x:Bind ViewModel.BeaconInterval, Mode=TwoWay}" />
+                        <TextBox
+                            HorizontalAlignment="Left"
+                            Header="Beacon Identifier"
+                            Text="{x:Bind ViewModel.BeaconIdentifier, Mode=TwoWay}" />
+                        <TextBox
+                            HorizontalAlignment="Left"
+                            Header="Beacon Token"
+                            Text="{x:Bind ViewModel.BeaconToken, Mode=TwoWay}" />
                     </StackPanel>
 
-                    <StackPanel x:Name="About" Visibility="Collapsed" Margin="10" Spacing="10">
+                    <StackPanel
+                        x:Name="About"
+                        Margin="10"
+                        Spacing="10"
+                        Visibility="Collapsed">
                         <TextBlock>Vernard, the VR Stopwatch</TextBlock>
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <TextBlock>Version</TextBlock>
@@ -50,8 +88,13 @@
                 </StackPanel>
             </ScrollView>
 
-            <StackPanel x:Name="Actions" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10"
-                    Margin="0, 10, 0, 0" Grid.Row="1">
+            <StackPanel
+                x:Name="Actions"
+                Grid.Row="1"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="10">
                 <Button Click="ButtonCancel_Click">Cancel</Button>
                 <Button Click="ButtonApply_Click">Apply</Button>
                 <Button Click="ButtonSave_Click">Save</Button>
