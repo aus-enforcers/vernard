@@ -12,7 +12,9 @@ namespace Vernard.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException("IntToTimeSpanConverter only supports OneTime and OneWay binding modes");
+            throw new NotImplementedException(
+                "IntToTimeSpanConverter only supports OneTime and OneWay binding modes"
+            );
         }
     }
 }

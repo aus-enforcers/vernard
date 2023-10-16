@@ -55,7 +55,9 @@ namespace Vernard.Models
         private T LoadSetting<T>(string settingKey, T defaultValue)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            return localSettings.Values.ContainsKey(settingKey) ? (T)localSettings.Values[settingKey] : defaultValue;
+            return localSettings.Values.ContainsKey(settingKey)
+                ? (T)localSettings.Values[settingKey]
+                : defaultValue;
         }
 
         private void SaveSetting(string settingKey, object value)

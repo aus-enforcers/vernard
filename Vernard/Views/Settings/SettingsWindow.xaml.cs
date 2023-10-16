@@ -17,13 +17,16 @@ namespace Vernard.Views.Settings
             var appModel = App.GetApplicationModel();
             GetAppPresenter(appWindow).IsAlwaysOnTop = appModel.AlwaysOnTop;
             appModel.Reload += ApplicationModel_OnReload;
-            
-            ApplicationFrame.Navigate(typeof(SettingsPage), () =>
-            {
-                var appModel = App.GetApplicationModel();
-                appModel.Reload -= ApplicationModel_OnReload;
-                Close();
-            });
+
+            ApplicationFrame.Navigate(
+                typeof(SettingsPage),
+                () =>
+                {
+                    var appModel = App.GetApplicationModel();
+                    appModel.Reload -= ApplicationModel_OnReload;
+                    Close();
+                }
+            );
         }
 
         private void ApplicationModel_OnReload(object sender, EventArgs e)

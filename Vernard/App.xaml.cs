@@ -7,7 +7,7 @@ namespace Vernard
     public partial class App : Application
     {
         internal ApplicationModel ApplicationModel { get; init; }
-     
+
         public App()
         {
             this.InitializeComponent();

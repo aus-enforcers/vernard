@@ -74,7 +74,6 @@ namespace Vernard.Views.Main
 
         private void ButtonAddMinute_Click(object sender, RoutedEventArgs e)
         {
-
             ViewModel.AddMinute();
         }
 

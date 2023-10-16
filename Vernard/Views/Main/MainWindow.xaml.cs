@@ -64,6 +64,5 @@ namespace Vernard.Views.Main
             WindowId wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
             return DisplayArea.GetFromWindowId(wndId, DisplayAreaFallback.Nearest);
         }
-
     }
 }

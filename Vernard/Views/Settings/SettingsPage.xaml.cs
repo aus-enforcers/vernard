@@ -60,7 +60,10 @@ namespace Vernard.Views.Settings
             Close();
         }
 
-        private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void NavigationView_ItemInvoked(
+            NavigationView sender,
+            NavigationViewItemInvokedEventArgs args
+        )
         {
             if (args.InvokedItemContainer != null)
             {

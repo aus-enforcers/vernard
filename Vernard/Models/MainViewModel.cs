@@ -59,36 +59,75 @@ namespace Vernard.Models
             }
         }
 
-
         private bool m_isReady;
-        internal bool IsReady { get => m_isReady; set => SetProperty(ref m_isReady, value); }
+        internal bool IsReady
+        {
+            get => m_isReady;
+            set => SetProperty(ref m_isReady, value);
+        }
 
         private bool m_isPlaying;
-        internal bool IsPlaying { get => m_isPlaying; set => SetProperty(ref m_isPlaying, value); }
+        internal bool IsPlaying
+        {
+            get => m_isPlaying;
+            set => SetProperty(ref m_isPlaying, value);
+        }
 
         private bool m_isNotPlaying;
-        internal bool IsNotPlaying { get => m_isNotPlaying; set => SetProperty(ref m_isNotPlaying, value); }
+        internal bool IsNotPlaying
+        {
+            get => m_isNotPlaying;
+            set => SetProperty(ref m_isNotPlaying, value);
+        }
 
         private bool m_isPaused;
-        internal bool IsPaused { get => m_isPaused; set => SetProperty(ref m_isPaused, value); }
+        internal bool IsPaused
+        {
+            get => m_isPaused;
+            set => SetProperty(ref m_isPaused, value);
+        }
 
         private bool m_isPlayable;
-        internal bool IsPlayable { get => m_isPlayable; set => SetProperty(ref m_isPlayable, value); }
+        internal bool IsPlayable
+        {
+            get => m_isPlayable;
+            set => SetProperty(ref m_isPlayable, value);
+        }
 
         private bool m_isUnsanitised;
-        internal bool IsUnsanitised { get => m_isUnsanitised; set => SetProperty(ref m_isUnsanitised, value); }
+        internal bool IsUnsanitised
+        {
+            get => m_isUnsanitised;
+            set => SetProperty(ref m_isUnsanitised, value);
+        }
 
         private bool m_isBroken;
-        internal bool IsBroken { get => m_isBroken; set => SetProperty(ref m_isBroken, value); }
+        internal bool IsBroken
+        {
+            get => m_isBroken;
+            set => SetProperty(ref m_isBroken, value);
+        }
 
         private Color m_color;
-        internal Color Color { get => m_color; set => SetProperty(ref m_color, value); }
+        internal Color Color
+        {
+            get => m_color;
+            set => SetProperty(ref m_color, value);
+        }
 
         private Color m_progressForeground;
-        internal Color ProgressForeground { get => m_progressForeground; set => SetProperty(ref m_progressForeground, value); }
+        internal Color ProgressForeground
+        {
+            get => m_progressForeground;
+            set => SetProperty(ref m_progressForeground, value);
+        }
 
         private Color m_progressBackground;
-        internal Color ProgressBackground { get => m_progressBackground; set => SetProperty(ref m_progressBackground, value); }
+        internal Color ProgressBackground
+        {
+            get => m_progressBackground;
+            set => SetProperty(ref m_progressBackground, value);
+        }
 
         internal MainViewModel()
         {
@@ -185,6 +224,7 @@ namespace Vernard.Models
         {
             IsReady = State == TimerState.Ready;
         }
+
         private void UpdateIsPlaying()
         {
             IsPlaying = State == TimerState.Playing;
@@ -197,7 +237,10 @@ namespace Vernard.Models
 
         private void UpdateIsPlayable()
         {
-            IsPlayable = State == TimerState.Ready || State == TimerState.Playing || State == TimerState.Paused;
+            IsPlayable =
+                State == TimerState.Ready
+                || State == TimerState.Playing
+                || State == TimerState.Paused;
         }
 
         private void UpdateIsPaused()
