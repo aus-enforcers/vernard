@@ -15,7 +15,18 @@ namespace Vernard.Views.Settings
         {
             this.InitializeComponent();
             ViewModel = new SettingsViewModel();
-            App.GetApplicationModel().OnReload += delegate { ViewModel.Load(); };
+            App.GetApplicationModel().Reload += ApplicationModel_OnReload;
+        }
+
+        private void ApplicationModel_OnReload(object sender, EventArgs e)
+        {
+            ViewModel.Load();
+        }
+
+        private void Close()
+        {
+            App.GetApplicationModel().Reload -= ApplicationModel_OnReload;
+            CloseAction();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs eventArgs)
@@ -26,7 +37,7 @@ namespace Vernard.Views.Settings
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            CloseAction();
+            Close();
         }
 
         private void ButtonApply_Click(object sender, RoutedEventArgs e)
@@ -37,7 +48,7 @@ namespace Vernard.Views.Settings
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Save();
-            CloseAction();
+            Close();
         }
     }
 }

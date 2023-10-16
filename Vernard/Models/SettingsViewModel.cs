@@ -4,7 +4,6 @@ namespace Vernard.Models
 {
     internal class SettingsViewModel : BindableBase
     {
-
         private int m_defaultTime;
         internal int DefaultTime { get => m_defaultTime; set => SetProperty(ref m_defaultTime, value); }
 

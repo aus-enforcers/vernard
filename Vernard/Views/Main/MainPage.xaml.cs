@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using System;
 using System.Timers;
 using Vernard.Models;
 using Vernard.Views.Settings;
@@ -15,7 +16,12 @@ namespace Vernard.Views.Main
         {
             this.InitializeComponent();
             ViewModel = new MainViewModel();
-            App.GetApplicationModel().OnReload += delegate { ViewModel.Load(); };
+            App.GetApplicationModel().Reload += ApplicationModel_OnReload;
+        }
+
+        private void ApplicationModel_OnReload(object sender, EventArgs e)
+        {
+            ViewModel.Load();
         }
 
         private void CreateTimer()

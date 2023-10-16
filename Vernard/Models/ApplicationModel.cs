@@ -15,13 +15,12 @@ namespace Vernard.Models
         internal string BeaconIdentifier { get; set; }
         internal string BeaconToken { get; set; }
 
-        internal event EventHandler OnReload;
+        internal event EventHandler Reload;
 
         internal ApplicationModel()
         {
             Load();
         }
-
 
         internal void Load()
         {
@@ -35,7 +34,7 @@ namespace Vernard.Models
             BeaconIdentifier = LoadSetting("beaconIdentifier", "");
             BeaconToken = LoadSetting("beaconToken", "");
 
-            DoOnReload();
+            OnReload();
         }
 
         internal void Save()
@@ -50,7 +49,7 @@ namespace Vernard.Models
             SaveSetting("beaconIdentifier", BeaconIdentifier);
             SaveSetting("beaconToken", BeaconToken);
 
-            DoOnReload();
+            OnReload();
         }
 
         private T LoadSetting<T>(string settingKey, T defaultValue)
@@ -65,9 +64,9 @@ namespace Vernard.Models
             localSettings.Values[settingKey] = value;
         }
 
-        private void DoOnReload()
+        private void OnReload()
         {
-            OnReload?.Invoke(this, EventArgs.Empty);
+            Reload?.Invoke(this, EventArgs.Empty);
         }
     }
 }

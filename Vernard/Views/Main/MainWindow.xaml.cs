@@ -23,7 +23,7 @@ namespace Vernard.Views.Main
             appPresenter.IsAlwaysOnTop = appModel.AlwaysOnTop;
             appPresenter.IsMaximizable = false;
             appPresenter.IsResizable = false;
-            appModel.OnReload += ApplicationModel_OnLoad;
+            appModel.Reload += ApplicationModel_OnReload;
 
             var displayArea = GetDisplayArea();
             if (displayArea is not null)
@@ -37,7 +37,7 @@ namespace Vernard.Views.Main
             ApplicationFrame.Navigate(typeof(MainPage));
         }
 
-        private void ApplicationModel_OnLoad(object sender, EventArgs e)
+        private void ApplicationModel_OnReload(object sender, EventArgs e)
         {
             var appWindow = GetAppWindow();
             if (appWindow != null)
