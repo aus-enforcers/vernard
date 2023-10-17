@@ -6,12 +6,12 @@ namespace Vernard.Utilities
 {
     internal static class StartupTaskUtility
     {
-        public async static Task<bool> IsEnabled()
+        public static async Task<bool> IsEnabled()
         {
             return CheckStartupTaskStateIsEnabled((await GetStartupTask()).State);
         }
 
-        public async static Task<bool> Toggle(bool enabled)
+        public static async Task<bool> Toggle(bool enabled)
         {
             var startupTask = await GetStartupTask();
 
@@ -29,7 +29,7 @@ namespace Vernard.Utilities
             return false;
         }
 
-        private async static Task<StartupTask> GetStartupTask()
+        private static async Task<StartupTask> GetStartupTask()
         {
             return await StartupTask.GetAsync("YellowCorps.Vernard.StartupTask");
         }
