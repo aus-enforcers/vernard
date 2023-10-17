@@ -1,5 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
+using System;
 using Vernard.Models;
+using Vernard.Utilities;
 using Vernard.Views.Main;
 
 namespace Vernard
@@ -13,6 +15,20 @@ namespace Vernard
             this.InitializeComponent();
             ApplicationModel = new ApplicationModel();
             ApplicationModel.Load();
+            ApplicationModel.Reload += ApplicationModel_OnReload;
+        }
+
+        private async void ApplicationModel_OnReload(object sender, EventArgs e)
+        {
+            if (await StartupTaskUtility.IsEnabled() != ApplicationModel.OpenAtLogin)
+            {
+                var openAtLogin = await StartupTaskUtility.Toggle(ApplicationModel.OpenAtLogin);
+                if (openAtLogin != ApplicationModel.OpenAtLogin)
+                {
+                    ApplicationModel.OpenAtLogin = openAtLogin;
+                    ApplicationModel.Save();
+                }
+            }
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
