@@ -1,6 +1,5 @@
-﻿using Windows.UI;
-using Vernard.Styles;
-using Microsoft.UI.Xaml;
+﻿using Vernard.Styles;
+using Windows.UI;
 
 namespace Vernard.Models
 {

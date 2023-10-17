@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml;
-
-namespace Vernard.Models
+﻿namespace Vernard.Models
 {
     internal class SettingsViewModel : BindableBase
     {
