@@ -40,12 +40,11 @@ jobs:
     - name: Decode PFX
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
-        $certificate = "GithubAction.pfx"
+        $certificate = Join-Path $PWD "GithubAction.pfx"
         [IO.File]::WriteAllBytes("$certificate", $pfx_cert_byte)
-        ls
 
     - name: Build Application Package
-      run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=GithubAction.pfx /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
+      run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=$( Join-Path $PWD "GithubAction.pfx" ) /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
 
     - name: Remove PFX
       run: Remove-Item -path GithubAction.pfx
