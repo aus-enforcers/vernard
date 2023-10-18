@@ -42,7 +42,7 @@ jobs:
           [IO.File]::WriteAllBytes("$certificate", $pfx_cert_byte)
 
       - name: Build Application Package
-        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=$( Join-Path $PWD "GithubAction.pfx" ) /p:PackageCertificatePassword=${{ secrets.PFX_PASSWORD }} /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
+        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=$( Join-Path $PWD "GithubAction.pfx" ) /p:PackageCertificatePassword="${{ secrets.PFX_PASSWORD }}" /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
 
       - name: Remove PFX
         run: Remove-Item -path GithubAction.pfx
