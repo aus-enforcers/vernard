@@ -3,7 +3,7 @@ using Color = Windows.UI.Color;
 
 namespace Vernard.Styles
 {
-    internal class Colors
+    internal static class Colors
     {
         internal static readonly Color Slate = FromHex("#94a3b8");
         internal static readonly Color Red = FromHex("#b91c1c");

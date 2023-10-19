@@ -1,4 +1,5 @@
-﻿using Vernard.Styles;
+﻿using System;
+using Vernard.Styles;
 using Windows.UI;
 
 namespace Vernard.Models
@@ -35,7 +36,7 @@ namespace Vernard.Models
         internal double Progress
         {
             get => m_progress;
-            set => SetProperty(ref m_progress, value <= 0 ? 0 : (value >= 100 ? 100 : value));
+            set => SetProperty(ref m_progress, Math.Clamp(value, 0, 100));
         }
 
         private TimerState m_state;
@@ -294,20 +295,12 @@ namespace Vernard.Models
 
         private void UpdateProgressBackground()
         {
-            switch (State)
+            ProgressBackground = State switch
             {
-                case TimerState.Broken:
-                    ProgressBackground = Colors.Purple;
-                    break;
-
-                case TimerState.Unsanitised:
-                    ProgressBackground = Colors.Amber;
-                    break;
-
-                default:
-                    ProgressBackground = Colors.Slate;
-                    break;
-            }
+                TimerState.Broken => Colors.Purple,
+                TimerState.Unsanitised => Colors.Amber,
+                _ => Colors.Slate,
+            };
         }
     }
 }

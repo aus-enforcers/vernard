@@ -52,7 +52,7 @@ namespace Vernard.Models
             OnReload();
         }
 
-        private T LoadSetting<T>(string settingKey, T defaultValue)
+        private static T LoadSetting<T>(string settingKey, T defaultValue)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             return localSettings.Values.ContainsKey(settingKey)
@@ -60,7 +60,7 @@ namespace Vernard.Models
                 : defaultValue;
         }
 
-        private void SaveSetting(string settingKey, object value)
+        private static void SaveSetting(string settingKey, object value)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values[settingKey] = value;

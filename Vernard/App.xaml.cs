@@ -33,7 +33,7 @@ namespace Vernard
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new();
             mainWindow.Activate();
         }
 

@@ -38,10 +38,10 @@ namespace Vernard.Views.Settings
             CloseAction();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs eventArgs)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            CloseAction = (Action)eventArgs.Parameter;
-            base.OnNavigatedTo(eventArgs);
+            CloseAction = (Action)e.Parameter;
+            base.OnNavigatedTo(e);
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -95,7 +95,7 @@ namespace Vernard.Views.Settings
                         break;
 
                     default:
-                        throw new Exception($"Unknown tag {tag}");
+                        throw new ArgumentException($"Unknown tag {tag}");
                 }
             }
         }

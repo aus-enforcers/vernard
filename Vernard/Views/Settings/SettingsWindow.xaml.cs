@@ -45,7 +45,7 @@ namespace Vernard.Views.Settings
             return AppWindow.GetFromWindowId(wndId);
         }
 
-        private OverlappedPresenter GetAppPresenter(AppWindow appWindow)
+        private static OverlappedPresenter GetAppPresenter(AppWindow appWindow)
         {
             return appWindow.Presenter as OverlappedPresenter;
         }
