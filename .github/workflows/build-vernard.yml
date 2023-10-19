@@ -43,7 +43,7 @@ jobs:
           Remove-Item -path GithubAction.pfx
 
       - name: Build Application Package
-        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
+        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:AppxPackageDir="Packages\" /p:GenerateAppxPackageOnBuild=true
 
       - name: Upload MSIX package
         uses: actions/upload-artifact@v2
