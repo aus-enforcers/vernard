@@ -35,15 +35,15 @@ jobs:
       - name: Restore Application
         run: msbuild Vernard /t:Restore /p:Configuration=Release
 
-      - name: Decode PFX
+      - name: Install PFX
         run: |
-          [IO.File]::WriteAllBytes("Vernard/GithubAction.pfx", [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}"))
+          [IO.File]::WriteAllBytes("GithubAction.pfx", [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}"))
+          $Password = ConvertTo-SecureString "${{ secrets.PFX_PASSWORD }}" -AsPlainText -Force
+          Import-PfxCertificate -FilePath GithubAction.pfx -Password $Password -CertStoreLocation Cert:\CurrentUser\My
+          Remove-Item -path GithubAction.pfx
 
       - name: Build Application Package
-        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile="GithubAction.pfx" /p:PackageCertificatePassword="${{ secrets.PFX_PASSWORD }}" /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
-
-      - name: Remove PFX
-        run: Remove-Item -path GithubAction.pfx
+        run: msbuild Vernard /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:AppxPackageDir="Packages" /p:GenerateAppxPackageOnBuild=true
 
       - name: Upload MSIX package
         uses: actions/upload-artifact@v2
