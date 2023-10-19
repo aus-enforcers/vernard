@@ -11,16 +11,24 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <PackageCertificateThumbprint>3D6204AA3A4E806A05B42AD2EEB5CE8A38314F2B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>56FAEADFC1090983BF23449A01310762042464AE</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-	<Version>2.0.0.0</Version>
-	<Copyright>MIT License, © Yellow Corps 2023</Copyright>
+    <Version>2.0.0.0</Version>
+    <Copyright>MIT License, © Yellow Corps 2023</Copyright>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampServerUrl>http://timestamp.digicert.com</AppxPackageSigningTimestampServerUrl>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <ItemGroup>
-	<None Remove="Views\Main\MainWindow.xaml" />
-	<None Remove="Views\Main\MainPage.xaml" />
-	<None Remove="Views\Settings\SettingsWindow.xaml" />
-	<None Remove="Views\Settings\SettingsPage.xaml" />
+    <None Remove="Views\Main\MainWindow.xaml" />
+    <None Remove="Views\Main\MainPage.xaml" />
+    <None Remove="Views\Settings\SettingsWindow.xaml" />
+    <None Remove="Views\Settings\SettingsPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Page Remove="App.xaml" />
