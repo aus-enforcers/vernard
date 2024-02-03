@@ -1,0 +1,12 @@
+---
+name: build vernard (self-hosted)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_vernard:
+    uses: yellow-corps/vernard/.github/workflows/build-vernard.yml@main
+    with:
+      runner: self-hosted
+    secrets: inherit
